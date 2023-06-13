@@ -14,12 +14,12 @@ for row in sheet:
     for cell in filter(lambda c: bool(c.value), row):
         messages = (
             {"role": "system", "content": "あなたは、私を助けてくれるアシスタントです。"},
-            {"role": "user", "content": f"{cell.value}についての面白い話をして。"}
+            {"role": "user", "content": f"{cell.value}とは"}
         )
         
         completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=messages
+            model="gpt-3.5-turbo", 
+            messages=messages
         )
 
         print(completion["choices"][0]["message"]["content"])
