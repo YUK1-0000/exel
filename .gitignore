@@ -1,3 +1,7 @@
 __pycache__
+
+outputs/*.txt
+!outputs/README.txt
+
+# ソフトウェア用
 config.toml
-config.template.toml
