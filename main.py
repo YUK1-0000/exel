@@ -31,7 +31,7 @@ class Tools:
             if child.suffix == ".xlsx"
         })
 
-    def _open_sheet_block(self, path: Path) -> Worksheet:        
+    def _open_sheet_block(self, path: Path) -> Worksheet:
         wb = load_workbook(path)
         sheet = wb["Sheet1"]
         wb.close()
@@ -45,7 +45,7 @@ class Tools:
 
 
 async def do_question(cell: Cell) -> str:
-    return "・%s %s\n%s" % (
+    return "\n・%s %s\n%s" % (
         cell.coordinate, cell.value,
         (await openai.ChatCompletion.acreate(
             model="gpt-3.5-turbo", 
@@ -60,7 +60,7 @@ async def do_question(cell: Cell) -> str:
 async def process_sheet(tools: Tools, path: Path) -> None:
     for row in await tools.open_sheet(path):
         async with aopen(f"outputs/{started_at:%Y-%m-%d_%H:%M}.txt", "a") as f:
-            await f.write("\n\n\n".join({await task for task in {
+            await f.write("".join({await task for task in {
                 tools.loop.create_task(
                     do_question(cell),
                     name="process_sheet: cell"
