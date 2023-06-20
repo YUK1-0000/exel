@@ -45,7 +45,7 @@ class Tools:
 
 
 async def do_question(cell: Cell) -> str:
-    return "\n・%s %s\n%s" % (
+    return "\n\n・%s %s\n%s" % (
         cell.coordinate, cell.value,
         (await openai.ChatCompletion.acreate(
             model="gpt-3.5-turbo", 
